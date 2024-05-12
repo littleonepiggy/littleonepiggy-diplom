@@ -5,24 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite('resources/css/app.css')
 </head>
 <body class="h-full">
-<div class="min-h-full">
+<div class="h-full">
     <nav class="bg-gray-800">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between">
           <div class="flex items-center">
-            <div class="flex-shrink-0">
-              <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
-            </div>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                <x-header-nav href="/" :active="request()->is('/')">Home</x-header-nav>
-                <x-header-nav href="/about" :active="request()->is('about')">About</x-header-nav>
-                <x-header-nav href="/contacts" :active="request()->is('contacts')">Contacts</x-header-nav>
+                <x-header-nav href="/" :active="request()->is('/')">Главная</x-header-nav>
+                <x-header-nav href="/about" :active="request()->is('about')">Тесты</x-header-nav>
+                <x-header-nav href="/contacts" :active="request()->is('contacts')">Дополнительно</x-header-nav>
               </div>
             </div>
           </div>
@@ -41,8 +37,10 @@
                 <div>
                   <button type="button" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                     <span class="absolute -inset-1.5"></span>
-                    <span class="sr-only">Open user menu</span>
-                    <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                    <span class="sr-only">Open user menu</span>   
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgb(229, 231, 235)" class="w-6 h-6">
+                      <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
+                    </svg>                             
                   </button>
                 </div>
   
@@ -121,7 +119,7 @@
         <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $heading }}</h1>
       </div>
     </header>
-    <main>
+    <main class="h-full">
       <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         {{ $slot }}
       </div>
