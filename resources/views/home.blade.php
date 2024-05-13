@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot:heading></x-slot:heading>
-    <form class="max-w-full h-full px-36 mx-auto mt-12 mb-24">   
+    <form class="max-w-full h-full px-36 mx-auto mt-12 mb-24" action="" method="GET">   
         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Поиск</label>
         <div class="relative">
             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">

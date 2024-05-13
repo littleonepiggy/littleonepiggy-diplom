@@ -13,3 +13,9 @@ Route::get('/about', function () {
 Route::get('/contacts', function () {
     return view('contacts');
 });
+
+Route::get('/search/{search}', function ($search) {
+
+    return view('search_response', ['search_response' => $search]);
+
+});
