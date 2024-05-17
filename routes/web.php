@@ -1,21 +1,27 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/about', function () {
-    return view('about');
+Route::get('/test/{id}', function ($id) {
+    return view('test', ['test_id' => $id]);
 });
 
-Route::get('/contacts', function () {
-    return view('contacts');
+Route::get('/tests', function() {
+    return view('tests');
 });
 
-Route::get('/search/{search}', function ($search) {
+Route::get('/more', function () {
+    return view('more');
+});
 
-    return view('search_response', ['search_response' => $search]);
+Route::get('/search/{query}', function (Request $r, $query) {
+
+    return view('search_response', ['search_response' => $query]);
 
 });
+
