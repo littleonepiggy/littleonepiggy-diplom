@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WordsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +22,7 @@ Route::get('/more', function () {
 
 Route::get('/search/{query}', function (Request $r, $query) {
 
-    return view('search_response', ['search_response' => $query]);
+    return view('search_response', ['words' => WordsController::search($query)]);
 
 });
 

@@ -20,8 +20,8 @@
               <div class="ml-10 flex items-baseline space-x-4">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 <x-header-nav href="/" :active="request()->is('/')">Главная</x-header-nav>
-                <x-header-nav href="/tests" :active="request()->is('about')">Тесты</x-header-nav>
-                <x-header-nav href="/more" :active="request()->is('contacts')">Дополнительно</x-header-nav>
+                <x-header-nav href="/tests" :active="request()->is('tests')">Тесты</x-header-nav>
+                <x-header-nav href="/more" :active="request()->is('more')">Дополнительно</x-header-nav>
               </div>
             </div>
           </div>
