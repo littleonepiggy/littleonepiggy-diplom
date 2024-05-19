@@ -22,7 +22,8 @@ Route::get('/more', function () {
 
 Route::get('/search/{query}', function (Request $r, $query) {
 
-    return view('search_response', ['words' => WordsController::search($query)]);
+    return view('search_response', ['words' => WordsController::search($query), 
+        'query' => $query]);
 
 });
 

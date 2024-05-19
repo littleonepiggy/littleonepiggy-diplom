@@ -10,7 +10,7 @@
 
     <script src="/js/index.js"></script>
 </head>
-<body class="h-full">
+<body class="h-full overflow-x-hidden">
 <div class="h-full">
     <nav class="bg-gray-800">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -123,7 +123,7 @@
       </div>
     </header>
     <main class="h-full">
-      <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl pt-6 sm:px-6 lg:px-8">
         {{ $slot }}
       </div>
     </main>

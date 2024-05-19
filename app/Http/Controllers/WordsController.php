@@ -11,12 +11,20 @@ class WordsController extends Controller
         
         $words = Words::where(preg_match('/[\p{Cyrillic}]/u', $query) ? 'gloss' : 'kanji', 'LIKE', '%'.$query.'%')->get();
         foreach ($words as $word) {
-            $word['short_kanji'] = min(array_values(array_map('trim', preg_split('/,/', $word->kanji))));
+            
+            $kanji = min(array_values(array_map('trim', preg_split('/,/', $word->kanji))));
+
+            if ($kanji == '') {
+                $kanji = min(array_values(array_map('trim', preg_split('/,/', $word->reading))));
+            }
+
+                $word['short_kanji'] = [ 'kanji' => $kanji, 'length' => strlen($kanji) ];
         }
 
         $words = $words->toArray();
 
-        usort($words, function ($a, $b) { return strlen($a['short_kanji']) - strlen($b['short_kanji']); });
+        
+        usort($words, function ($a, $b) { return $a['short_kanji']['length'] - $b['short_kanji']['length']; });
         return $words;
         
     }
