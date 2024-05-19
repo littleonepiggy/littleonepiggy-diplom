@@ -1,6 +1,7 @@
 <x-layout>
     <x-slot:heading></x-slot:heading>
-    <form class="max-w-full mx-auto mt-12 mb-24" onsubmit="formSend(this, event)" method="GET" accept-charset="UTF-8">   
+
+    <form class="max-w-full mx-auto mt-12 mb-24" onsubmit="formSendSearch(this, event)" method="GET" accept-charset="UTF-8">   
         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Поиск</label>
         <div class="relative">
             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -15,11 +16,13 @@
             </button>
         </div>
     </form>
-    <p class="pb-2 w-full text-gray-500">Всего результатов: {{ count($words) }}</p>
+
+    @if (!empty($words))
+    <p class="pb-2 w-full text-gray-500">Всего показано: {{ count($words) * $parameter == 0 ? 50 : count($words) * $parameter }} слов из {{ $wordsAll }} возможных</p>
     <div class="bg-white py-5 shadow-lg h-full" style="width: 100vw;position: relative;left: calc(-50vw + 50%);">
         @foreach ($words as $word)
-        <div class='py-5 max-w-6xl mx-auto grid-cols-6 grod-rows-1 grid' style="box-shadow: 0px 1px 0px rgba(0,0,0,.1)">
-            <div class="col-span-1">
+        <div class='py-5 max-w-6xl mx-auto grid-cols-7 grid-rows-1 grid' style="box-shadow: 0px 1px 0px rgba(0,0,0,.1)">
+            <div class="col-span-2">
             @if ($word['kanji'] == '')
                 <h1 class='text-4xl font-medium'>{{ $word['reading'] }}</h1>
             @else
@@ -35,7 +38,7 @@
                      == 1)
                         @foreach (preg_split('/\\;/', $word['gloss'],  -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE)
                         as $gloss_item_second)
-                            <p>{{ $gloss_item_second . ';' }}</p>
+                            <p>{{ $gloss_item_second }}</p>
                         @endforeach
                     @else
                         <p>{{ $gloss_key + 1 . ') ' . $gloss_item }}</p>
@@ -50,10 +53,30 @@
             </div>
         </div>
         @endforeach
-        @empty($words)
-        <div class='py-5 max-w-6xl mx-auto max-h-full text-center text-gray-500 text-xl'>
-            <p>По вашему запросу ничего не найдено</p>
+        <div class="max-w-6xl mx-auto flex">
+        @if ($parameter > 1)
+        <form class="mr-auto flex" action="/search/{{$query}}" method="GET">
+            <input type="text" name="page" value="{{$parameter - 1}}" hidden>
+            <button type="submit" class="text-white px-4 m-5 py-2 bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text- dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Предыдущая страница
+            </button>
+        </form>
+        @endif
+        @if (count($words) == 50)
+        <form class="ml-auto flex" action="/search/{{$query}}" method="GET">
+            <input type="text" name="page" value="{{$parameter + 2}}" hidden>
+            <button type="submit" class="text-white px-4 m-5 py-2 bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text- dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Следующая страница
+            </button>
+        </form>
+        @endif
         </div>
-        @endempty
     </div>
+    @endif
+
+    @empty($words)
+    <div class='pt-20 max-w-6xl mx-auto my-auto max-h-full text-center text-gray-500 text-xl'>
+        <p>По вашему запросу ничего не найдено</p>
+    </div>
+    @endempty
 </x-layout>
