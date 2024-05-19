@@ -122,8 +122,8 @@
         <h1 class="text-3xl font-bold tracking-tight text-gray-900" >{{ $heading }}</h1>
       </div>
     </header>
-    <main class="h-full">
-      <div class="mx-auto max-w-7xl pt-6 sm:px-6 lg:px-8">
+    <main class="max-h-full">
+      <div class="h-full mx-auto max-w-7xl pt-6 sm:px-6 lg:px-8">
         {{ $slot }}
       </div>
     </main>

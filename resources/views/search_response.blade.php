@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot:heading></x-slot:heading>
-    <form class="max-w-full h-full mx-auto mt-12 mb-24" onsubmit="formSend(this, event)" method="GET" accept-charset="UTF-8">   
+    <form class="max-w-full mx-auto mt-12 mb-24" onsubmit="formSend(this, event)" method="GET" accept-charset="UTF-8">   
         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Поиск</label>
         <div class="relative">
             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -27,7 +27,7 @@
                 <h1 class='text-4xl font-medium'>{{ $word['kanji'] }}</h1> 
             @endif
             </div>
-            <div class="col-span-5">
+            <div class="col-span-5 ms-2">
                 <div>
                 @foreach (preg_replace('/^\s/', '', preg_split('/\\d\\)/', $word['gloss'],  -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE)) 
                     as $gloss_key => $gloss_item)
@@ -43,10 +43,17 @@
                 @endforeach
                 </div>
                 <div class="mt-3 text-gray-500">
-                    {{ $word['position'] }} 
+                    @foreach ($word['position'] as $position_item)
+                        <p>{{ $position_item }}</p>
+                    @endforeach
                 </div>
             </div>
         </div>
         @endforeach
+        @empty($words)
+        <div class='py-5 max-w-6xl mx-auto max-h-full text-center text-gray-500 text-xl'>
+            <p>По вашему запросу ничего не найдено</p>
+        </div>
+        @endempty
     </div>
 </x-layout>
