@@ -1,7 +1,7 @@
 <x-layout>
     <x-slot:heading></x-slot:heading>
 
-    <form class="max-w-full mx-auto mt-12 mb-24" onsubmit="formSendSearch(this, event)" method="GET" accept-charset="UTF-8">   
+    <form class="max-w-full mx-auto mt-12 mb-24" onsubmit="formSendSearch(this, event, '/search/', '?page={{ $parameter }}')" method="GET" accept-charset="UTF-8">   
         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Поиск</label>
         <div class="relative">
             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -18,7 +18,7 @@
     </form>
 
     @if (!empty($words))
-    <p class="pb-2 w-full text-gray-500">Всего показано: {{ count($words) * $parameter == 0 ? 50 : count($words) * $parameter }} слов из {{ $wordsAll }} возможных</p>
+    <p class="pb-2 w-full text-gray-500">Всего показано: {{ $words_number }} слов из {{ $words_all }} возможных</p>
     <div class="bg-white py-5 shadow-lg h-full" style="width: 100vw;position: relative;left: calc(-50vw + 50%);">
         @foreach ($words as $word)
         <div class='py-5 max-w-6xl mx-auto grid-cols-7 grid-rows-1 grid' style="box-shadow: 0px 1px 0px rgba(0,0,0,.1)">
@@ -32,23 +32,14 @@
             </div>
             <div class="col-span-5 ms-2">
                 <div>
-                @foreach (preg_replace('/^\s/', '', preg_split('/\\d\\)/', $word['gloss'],  -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE)) 
-                    as $gloss_key => $gloss_item)
-                    @if (count(preg_replace('/^\s/', '', preg_split('/\\d\\)/', $word['gloss'],  -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE)))
-                     == 1)
-                        @foreach (preg_split('/\\;/', $word['gloss'],  -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE)
-                        as $gloss_item_second)
-                            <p>{{ $gloss_item_second }}</p>
-                        @endforeach
-                    @else
-                        <p>{{ $gloss_key + 1 . ') ' . $gloss_item }}</p>
-                    @endif
+                @foreach ($word['gloss'] as $gloss_key => $gloss)
+                    <p> {{count($word['gloss']) > 1 ? $gloss_key + 1 . ') ' : ''}}{{ $gloss }}</p>
                 @endforeach
                 </div>
                 <div class="mt-3 text-gray-500">
-                    @foreach ($word['position'] as $position_item)
-                        <p>{{ $position_item }}</p>
-                    @endforeach
+                @foreach ($word['position'] as $position_item)
+                    <p>{{ $position_item }}</p>
+                @endforeach
                 </div>
             </div>
         </div>
@@ -64,7 +55,7 @@
         @endif
         @if (count($words) == 50)
         <form class="ml-auto flex" action="/search/{{$query}}" method="GET">
-            <input type="text" name="page" value="{{$parameter + 2}}" hidden>
+            <input type="text" name="page" value="{{$parameter + 1}}" hidden>
             <button type="submit" class="text-white px-4 m-5 py-2 bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text- dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 Следующая страница
             </button>

@@ -17,9 +17,10 @@ const formSend = (t, e, m = 'GET', u = '/', data = []) => {
     
 }
 
-const formSendSearch = (t, e) => {
+const formSendSearch = (t, e, u = '', d = '') => {
     
     e.preventDefault(); 
-    window.location = `/search/${t[0].value}?page=1`;
+    // window.location = `/search/${t[0].value}${m ?? m}`;
+    window.location = `${u}${t[0].value}${d}`;
 
 }

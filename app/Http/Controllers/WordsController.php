@@ -16,29 +16,52 @@ class WordsController extends Controller
         $items = $items instanceof Collection ? $items : Collection::make($items);
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
-    public static function search ($query, $page) {
-        
+
+    public static function find($query) {
         // поиск слов содержащих кириллицу, если написано на кириллице — идёт поиск по значению слова,
-        // если на японском — идёт поиск по кандзи.
+        // если на другом — идёт поиск по кандзи.
         $words = Words::where(preg_match('/[\p{Cyrillic}]/u', $query) ? 'gloss' : 'kanji', 'LIKE', '%'.$query.'%')->get();
-        // записываем в массив число ВСЕХ совпадающих слов
-        $wordsAll = count(Words::where(preg_match('/[\p{Cyrillic}]/u', $query) ? 'gloss' : 'kanji', 'LIKE', '%'.$query.'%')
-        ->get()->toArray());
 
         foreach ($words as $word) {
-            // отделяем иероглифы по запятым, удаляем пробелы, находим наименьший по длине 
-            $kanji = min(array_values(array_map('trim', preg_split('/,/', $word->kanji))));
+            $word['gloss'] = self::delete_spaces($word['gloss']);
+            $word['position'] = array_unique(preg_replace('/^\s/', '', preg_split('/,/', $word->position)));
+        }
 
-            // если нет кандзи (слово без них), то делаем всё то же самое но со значениями слова
+        return $words;
+
+    }
+
+    public static function find_all($query) {
+        return Words::where(preg_match('/[\p{Cyrillic}]/u', $query) ? 'gloss' : 'kanji', 'LIKE', '%'.$query.'%')->get();
+    }
+    public static function delete_spaces($word) {
+        // делит строку со значениями и записывает это в массив, удаляя ненужные пробелы
+        return preg_replace('/^\s/', '', preg_split('/\\d\\)/i', $word, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE));
+    }
+    public static function find_shortest($word, $column) {
+        // отделяем иероглифы по запятым, удаляем пробелы, находим наименьший по длине 
+        return min(array_values(array_map('trim', preg_split('/,/', $word[$column]))));
+    }
+    public static function search ($query, $page) {
+        
+        $words = self::find($query);
+        // записываем в массив число ВСЕХ совпадающих слов
+        $words_all = count(self::find_all($query)->toArray());
+
+        foreach ($words as $word) {
+
+            $kanji = self::find_shortest($word, 'kanji');
+            // если нет кандзи (слово без них), то находим самый короткий кандзи 
+            // но по столбцу со значениями слова
             if ($kanji == '') {
-                $kanji = min(array_values(array_map('trim', preg_split('/,/', $word->reading))));
+                $kanji = self::find_shortest($word, 'reading');
             }
 
             // записываем в переменную наименьший по длине кандзи и его длину
             $word['short_kanji'] = ['kanji' => $kanji, 'length' => strlen($kanji)];
             // записываем в переменную с частями речи уникальный массив с разделёнными по запятым и убранным
             // в начале пробелом данными
-            $word['position'] = array_unique(preg_replace('/^\s/', '', preg_split('/,/', $word->position)));
+
         }
 
         // записываем в переменную преобразованные в массив слова
@@ -47,10 +70,10 @@ class WordsController extends Controller
         // сортируем массив слов по длине самого короткого кандзи с помощью пользовательской сортировки
         usort($words, function ($a, $b) { return $a['short_kanji']['length'] - $b['short_kanji']['length']; });
         
-        // пагинация по 50 слов на страницу, используется взятая из ларавеля функция paginate
+        // пагинация по 50 слов на страницу, используется взятая из laravel функция paginate
         $words = self::paginate($words, 50)->toArray()['data'];
 
-        return ['words' => $words, 'wordsAll' => $wordsAll];
+        return ['words' => $words, 'words_all' => $words_all];
         
     }
 }
