@@ -11,14 +11,10 @@ Route::get('/test/{id}', function ($id) {
 });
 Route::get('/search/{query}', function (Request $r, $query) {
 
-    $page = $r->query('page');
-    $page <= 0 || $page == null ? $page = 1 : '';
-
-    $result = WordsController::search($query, $page);
-    $words_number = $page == 1 ? count($result['words']) : ($page - 1) * 50 + count($result['words']); 
+    $result = WordsController::search($r, $query);
     
-    return view('search-response', ['words' => $result['words'],  
-        'words_all' => $result['words_all'], 'query' => $query, 'parameter' => $page, 'words_number' => $words_number ]);
+    return view('search-response', ['words' => $result['words'],  'words_all' => $result['words_all'], 
+    'query' => $query, 'parameter' => $result['page'], 'words_number' => $result['words_number'] ]);
 
 });
 

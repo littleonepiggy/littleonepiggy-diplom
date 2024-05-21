@@ -42,7 +42,7 @@ class WordsController extends Controller
         // отделяем иероглифы по запятым, удаляем пробелы, находим наименьший по длине 
         return min(array_values(array_map('trim', preg_split('/,/', $word[$column]))));
     }
-    public static function search ($query, $page) {
+    public static function search ($r, $query) {
         
         $words = self::find($query);
         // записываем в массив число ВСЕХ совпадающих слов
@@ -73,7 +73,12 @@ class WordsController extends Controller
         // пагинация по 50 слов на страницу, используется взятая из laravel функция paginate
         $words = self::paginate($words, 50)->toArray()['data'];
 
-        return ['words' => $words, 'words_all' => $words_all];
+        // дописать...
+        $page = $r->query('page');
+        $page <= 0 || $page == null ? $page = 1 : '';
+        $words_number = $page == 1 ? count($words) : ($page - 1) * 50 + count($words); 
+
+        return ['words' => $words, 'words_all' => $words_all, 'page' => $page, 'words_number' => $words_number];
         
     }
 }
