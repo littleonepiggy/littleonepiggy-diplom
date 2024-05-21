@@ -24,7 +24,7 @@ class WordsController extends Controller
 
         foreach ($words as $word) {
             $word['gloss'] = self::delete_spaces($word['gloss']);
-            $word['position'] = array_unique(preg_replace('/^\s/', '', preg_split('/,/', $word->position)));
+            $word['position'] = array_unique(preg_replace('/^\s/', '', preg_split('/,/', $word->position))); // !!! убрать цикл и выполнять regex уже в самом запросе
         }
 
         return $words;
