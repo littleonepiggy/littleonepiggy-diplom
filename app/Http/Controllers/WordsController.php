@@ -59,8 +59,6 @@ class WordsController extends Controller
 
             // записываем в переменную наименьший по длине кандзи и его длину
             $word['short_kanji'] = ['kanji' => $kanji, 'length' => strlen($kanji)];
-            // записываем в переменную с частями речи уникальный массив с разделёнными по запятым и убранным
-            // в начале пробелом данными
 
         }
 
@@ -73,7 +71,6 @@ class WordsController extends Controller
         // пагинация по 50 слов на страницу, используется взятая из laravel функция paginate
         $words = self::paginate($words, 50)->toArray()['data'];
 
-        // дописать...
         $page = $r->query('page');
         $page <= 0 || $page == null ? $page = 1 : '';
         $words_number = $page == 1 ? count($words) : ($page - 1) * 50 + count($words); 

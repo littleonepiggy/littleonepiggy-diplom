@@ -63,11 +63,10 @@
         @endif
         </div>
     </div>
-    @endif
-
-    @empty($words)
+    @else 
     <div class='pt-20 max-w-6xl mx-auto my-auto max-h-full text-center text-gray-500 text-xl'>
         <p>По вашему запросу ничего не найдено</p>
     </div>
-    @endempty
+    @endif
+
 </x-layout>

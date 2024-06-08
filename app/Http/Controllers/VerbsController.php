@@ -25,8 +25,10 @@ class VerbsController extends Controller
                 // проверяем, какого типа глагол: годан или итидан
                 if(preg_match('/Godan\s|Ichidan /i', $word['position'])) {
 
+                    // получаем корень глагола путём отсечения окончания
                     $verb_stem = preg_replace('/' . $verb_ending . '/', '', $verb);
                     
+                    // если это годан глагол, то спрягаем как годан
                     if(preg_match('/^Godan\s/i', $word['position'])) { $word['type'] = 'godan'; }
                     else { $word['type'] = 'ichidan'; }
 
