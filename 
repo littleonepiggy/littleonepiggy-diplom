@@ -1,0 +1,95 @@
+[33mcommit b57c3e1cf8ba085ae1bd5545f9c2cb44a01e669b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: littleonepiggy <carltaniks@gmail.com>
+Date:   Sat Jun 8 18:11:01 2024 +0500
+
+    Значительно обновлён сайт
+
+[33mcommit e60e886e9afd706b4de933e0cb9822f3ef001cf6[m
+Author: littleonepiggy <carltaniks@gmail.com>
+Date:   Tue May 21 22:15:49 2024 +0500
+
+    Приведены в порядок маршруты поиска
+
+[33mcommit 1050243cdd21d3dc084e6816694a418d0e86ec04[m
+Author: littleonepiggy <carltaniks@gmail.com>
+Date:   Tue May 21 21:28:25 2024 +0500
+
+    Добавлен SQLite WAL, сидер пользователей, обновлён конфиг и миграции
+
+[33mcommit e65b98b6ee49e763c0e82546b900ecded50ce300[m
+Author: littleonepiggy <carltaniks@gmail.com>
+Date:   Mon May 20 23:20:28 2024 +0500
+
+    Обновлён поиск, добавлен функционал склонения, обновлён js скрипт по отправке запроса
+
+[33mcommit cb53c72bb6a594c50b99a3767e13764872aade44[m
+Author: littleonepiggy <carltaniks@gmail.com>
+Date:   Sun May 19 20:08:11 2024 +0500
+
+    Значительно обновлён механизм поиска, добавлен переход по страницам
+
+[33mcommit 84797aaefc5568944c443726fe405d9d735f3ee1[m
+Author: littleonepiggy <carltaniks@gmail.com>
+Date:   Sun May 19 12:40:31 2024 +0500
+
+    Обновлён вид страницы результата поиска, обновлён механизм перераспредления столбца position
+
+[33mcommit ccf6dd05fd7ad3b60e4b88fcc800afa82942ad7d[m
+Author: littleonepiggy <carltaniks@gmail.com>
+Date:   Sun May 19 11:22:34 2024 +0500
+
+    Обновлена страница результата поиска, улучшен механизм поиска
+
+[33mcommit 5e67c457c3e820088084872eff6b31ad354a414a[m
+Author: littleonepiggy <carltaniks@gmail.com>
+Date:   Sun May 19 02:40:58 2024 +0500
+
+    Добавлена БД и механизма поиска по словам, модель для слов
+
+[33mcommit f2a94bc351fdcce75eb1e5b740e14e4b14a6ffb0[m
+Author: littleonepiggy <carltaniks@gmail.com>
+Date:   Fri May 17 23:46:29 2024 +0500
+
+    Добавлена JS логика, обновлена основная страница
+
+[33mcommit c62646c5f3fe6d5f3d6ab8bc7d56504d0b26ab23[m
+Author: littleonepiggy <carltaniks@gmail.com>
+Date:   Mon May 13 08:42:06 2024 +0500
+
+    Добавлена страница результата поиска и обновлен CSS файл
+
+[33mcommit c2ac1e9d34f260658bb091fa6d8c764e2240c54d[m
+Author: littleonepiggy <carltaniks@gmail.com>
+Date:   Mon May 13 01:22:39 2024 +0500
+
+    Добавлены 3 блока со спряжением, склонением и тестами на главной странице
+
+[33mcommit 6be0a360c2c191c4a01c1bf1d0e4c129f40d82c9[m
+Author: littleonepiggy <carltaniks@gmail.com>
+Date:   Sun May 12 21:03:20 2024 +0500
+
+    Добавлен Tailwind CSS, обновлён лейаут
+
+[33mcommit 22075051e9d39880de5b80362ffb432d7da1ba93[m
+Author: littleonepiggy <carltaniks@gmail.com>
+Date:   Mon May 6 03:41:03 2024 +0500
+
+    Добавлены 3 страницы и лейаут для них с компонентом навигации
+
+[33mcommit 4c2221278273f6aced3803e65cad15b9924726ff[m
+Author: littleonepiggy <carltaniks@gmail.com>
+Date:   Sat Apr 20 00:37:50 2024 +0500
+
+    changed welcome.blade.php text to boobie
+
+[33mcommit 4adacd24c6f0b48859148caaeeedb4b536044b55[m
+Author: littleonepiggy <carltaniks@gmail.com>
+Date:   Sat Apr 20 00:12:43 2024 +0500
+
+    deleted welcome.blade.php text
+
+[33mcommit dbec40054d834aea647161c8bb4a3f0a20b37976[m
+Author: littleonepiggy <carltaniks@gmail.com>
+Date:   Fri Apr 19 22:30:27 2024 +0500
+
+    first init
